@@ -19,7 +19,4 @@
 
 - docker build . -t jpalaparthi/nginx-basic-demo:v0.1.0
 
-- jpalaparthi/nginx-basic-demo:v0.1.0
-
-- docker run -d -p 8085:80 --name nginx-demo jpalaparthi/nginx-basic-demo:v0.1.0
-- docker push jpalaparthi/nginx-basic-demo:v0.1.0
+x- docker push jpalaparthi/nginx-basic-demo:v0.1.0
