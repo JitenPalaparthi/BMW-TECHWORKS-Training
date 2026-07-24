@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        My HTML Website
+    </title>
+
+    <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7fb;
+        color: #1f2937;
+        line-height: 1.6;
+    }
+
+    .header {
+        background: linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+        color: white;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .header h1 {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .section-heading {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+        font-size: 30px;
+        margin-bottom: 8px;
+    }
+
+    .section-heading p {
+        color: #6b7280;
+    }
+
+    .box-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .box {
+        flex: 1 1 300px;
+        background-color: white;
+        padding: 25px;
+        border-radius: 12px;
+
+        box-shadow:
+            0 6px 18px rgba(0, 0, 0, 0.08);
+
+        transition: transform 0.3s ease;
+    }
+
+    .box:hover {
+        transform: translateY(-6px);
+    }
+
+    .box h3 {
+        color: #2563eb;
+        margin-bottom: 12px;
+    }
+
+    .box p {
+        color: #4b5563;
+    }
+</style>
+
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Welcome to Our Website</h1>
+
+        <p>
+            Learn how an HTML-based website works.
+        </p>
+    </div>
+
+    <div class="container">
+
+        <div class="section-heading">
+            <h2>Our Services</h2>
+
+            <p>
+                Explore the services provided by our organization.
+            </p>
+        </div>
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>Web Development</h3>
+
+                <p>
+                    We create responsive and user-friendly websites.
+                </p>
+            </div>
+
+            <div class="box">
+                <h3>Cloud Solutions</h3>
+
+                <p>
+                    We build scalable cloud-based applications.
+                </p>
+            </div>
+
+            <div class="box">
+                <h3>Corporate Training</h3>
+
+                <p>
+                    We provide practical technology training.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
