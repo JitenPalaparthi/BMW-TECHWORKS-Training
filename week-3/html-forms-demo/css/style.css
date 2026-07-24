@@ -1,0 +1,116 @@
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Arial, Helvetica, sans-serif;
+            background:#eef2f7;
+        }
+
+        nav{
+            background:#1e3a8a;
+            color:white;
+            padding:18px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin-left:20px;
+            font-weight:bold;
+        }
+
+        .hero{
+            text-align:center;
+            padding:50px;
+            background:linear-gradient(135deg,#2563eb,#7c3aed);
+            color:white;
+        }
+
+        .hero h1{
+            font-size:42px;
+        }
+
+        .container{
+            width:90%;
+            max-width:900px;
+            margin:40px auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 0 15px rgba(0,0,0,.1);
+        }
+
+        h2{
+            margin-bottom:20px;
+            color:#1e3a8a;
+        }
+
+        .row{
+            display:flex;
+            gap:20px;
+        }
+
+        .col{
+            flex:1;
+        }
+
+        label{
+            display:block;
+            margin-top:15px;
+            font-weight:bold;
+        }
+
+        input,
+        textarea,
+        select{
+            width:100%;
+            padding:12px;
+            margin-top:5px;
+            border:1px solid #ccc;
+            border-radius:5px;
+            font-size:15px;
+        }
+
+        textarea{
+            resize:vertical;
+        }
+
+        .radio-group,
+        .check-group{
+            margin-top:10px;
+        }
+
+        .radio-group label,
+        .check-group label{
+            display:inline-block;
+            font-weight:normal;
+            margin-right:20px;
+        }
+
+        button{
+            margin-top:25px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            padding:15px 30px;
+            border-radius:5px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+        }
+
+        footer{
+            text-align:center;
+            margin:40px;
+            color:#666;
+        }
+
