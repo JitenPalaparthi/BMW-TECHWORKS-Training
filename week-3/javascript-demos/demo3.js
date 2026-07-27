@@ -39,16 +39,23 @@ console.log(doubles);
 sum=0;
 
 array2d.forEach(function(arr){
-
     arr.forEach(function(value){
-
     sum +=value
-
     });
-
 })
 
-console.log(sum);
+
+
+console.log("using foreach loop on a collection",sum);
+
+
+sum=0;
+for(let i=0;i<array2d.length;i++){
+    for(let j=0;j<array2d[i].length;j++){
+        sum+=array2d[i][j];
+    }
+}
+console.log("using normal nested loop",sum);
 
 
 let arr1=[5,2,9,1];
