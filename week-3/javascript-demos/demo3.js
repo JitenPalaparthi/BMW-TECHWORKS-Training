@@ -36,3 +36,26 @@ let doubles= numbers.map(n=>n*2);
 console.log(doubles);
 
 
+sum=0;
+
+array2d.forEach(function(arr){
+
+    arr.forEach(function(value){
+
+    sum +=value
+
+    });
+
+})
+
+console.log(sum);
+
+
+let arr1=[5,2,9,1];
+
+
+arr1.sort((a,b)=>a-b);
+
+console.log(arr1);
+
+console.log(fruits.reverse());
