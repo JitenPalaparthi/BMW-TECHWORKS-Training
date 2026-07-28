@@ -2,7 +2,7 @@ services:
   crud-api:
     build: .
     ports:
-      - "8080:8080"
+      - "18080:8080"
     volumes:
       - crud-data:/app/data
 
