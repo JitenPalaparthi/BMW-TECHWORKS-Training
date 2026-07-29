@@ -14,4 +14,5 @@ headers = {
 conn.request("POST", "/api/products", payload, headers)
 res = conn.getresponse()
 data = res.read()
+
 print(data.decode("utf-8"))

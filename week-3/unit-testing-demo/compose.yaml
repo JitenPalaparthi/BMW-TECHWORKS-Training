@@ -1,0 +1,8 @@
+services:
+  unit-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: java21-unit-tests
+    volumes:
+      - ./target:/workspace/target
