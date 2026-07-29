@@ -1,0 +1,133 @@
+{
+  "info": {
+    "_postman_id": "c7c5ffe3-997b-446e-9c61-a2b5c6218efb",
+    "name": "products-api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "1261917",
+    "_collection_link": "https://go.postman.co/collection/1261917-c7c5ffe3-997b-446e-9c61-a2b5c6218efb?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "create product",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Apple Macbook M4\",\n    \"description\": \"Apple Bionioc Chip M4 with ARM Processor\",\n    \"price\": 250000.00,\n    \"quantity\": 100\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{base_dev_url}}/api/products",
+          "protocol": "http",
+          "host": [
+            "{{base_dev_url}}"
+          ],
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get all products",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_dev_url}}{/api/products",
+          "host": [
+            "{{base_dev_url}}{"
+          ],
+          "path": [
+            "api",
+            "products"
+          ]
+        },
+        "description": "fetches all the products stored in the system"
+      },
+      "response": []
+    },
+    {
+      "name": "Get product by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_dev_url}}{/api/products/3",
+          "host": [
+            "{{base_dev_url}}{"
+          ],
+          "path": [
+            "api",
+            "products",
+            "3"
+          ]
+        },
+        "description": "Fetch a product by supplying id"
+      },
+      "response": []
+    },
+    {
+      "name": "delete a product",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Apple Macbook M4\",\n    \"description\": \"Apple Bionioc Chip M4 with ARM Processor\",\n    \"price\": 250000.00,\n    \"quantity\": 100\n}"
+        },
+        "url": {
+          "raw": "http://{{base_dev_url}}/api/products/10",
+          "protocol": "http",
+          "host": [
+            "{{base_dev_url}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            "10"
+          ]
+        },
+        "description": "to delete a product supply id"
+      },
+      "response": []
+    },
+    {
+      "name": "update a product",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Apple Macbook M4\",\n    \"description\": \"Apple Bionioc Chip M4 with ARM Processor With 24GB of RAM\",\n    \"price\": 230000.00,\n    \"quantity\": 80\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://{{base_dev_url}}/api/products/1",
+          "protocol": "http",
+          "host": [
+            "{{base_dev_url}}"
+          ],
+          "path": [
+            "api",
+            "products",
+            "1"
+          ]
+        },
+        "description": "Update a product based on ID, provide fileds to be updated"
+      },
+      "response": []
+    }
+  ]
+}
