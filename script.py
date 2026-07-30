@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+print("=" * 50)
+print("Hello World!")
+print("=" * 50)
+print("Welcome to the Git Pre-Commit Hook")
+print("Repository checks can be performed here.")
+print()
+print("Author       : Jiten Palaparthi")
+print("Project      : BMW TechWorks Training")
+print("Language     : Python")
+print("Python Hook  : Executed Successfully")
+print()
+print("Happy Coding! 🚀")
+print("=" * 50)
