@@ -1,0 +1,10 @@
+services:
+  crud-api:
+    image: jpalaparthi/demo-java-crud:v0.0.1
+    ports:
+      - "8080:8080"
+    volumes:
+      - crud-data:/app/data
+
+volumes:
+  crud-data:
