@@ -17,6 +17,8 @@ http://localhost:8081/service/rest/v1/system/eula \
 curl.exe -u "admin:admin@123" `
 http://localhost:8081/service/rest/v1/system/eula
 
+
+```powershell
 $response = Invoke-RestMethod `
     -Uri "http://localhost:8081/service/rest/v1/system/eula" `
     -Authentication Basic `
@@ -26,7 +28,11 @@ $response = Invoke-RestMethod `
     ))
 
 $DISCLAIMER = $response.disclaimer
+```
 
+
+
+```powershell
 $body = @{
     accepted  = $true
     disclaimer = $DISCLAIMER
@@ -42,3 +48,4 @@ Invoke-RestMethod `
     )) `
     -ContentType "application/json" `
     -Body $body
+    ```
