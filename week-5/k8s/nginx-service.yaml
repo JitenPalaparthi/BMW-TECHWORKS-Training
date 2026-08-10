@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: demo-ns
+spec:
+  type: NodePort #LoadBalancer    # Can also be set to NodePort
+  selector:
+    app: nginx           # Matches the label on your nginx-pod
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080           # External port exposed by the service
+    targetPort: 80       # Port the NGINX container listens on
+    nodePort: 30080      # Explicit NodePort (optional, range 30000-32767)
