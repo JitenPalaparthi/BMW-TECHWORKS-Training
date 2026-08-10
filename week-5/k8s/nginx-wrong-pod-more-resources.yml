@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-more-resources-pod
+  labels:
+    app: nginx
+    type: dev
+  namespace: demo-ns
+spec:
+  containers:
+  - name: nginx
+    image: 123nginx:latest
+    ports:
+    - containerPort: 80
+    resources:
+      requests:
+        cpu: "100m"        # 0.1 CPU core (guaranteed minimum)
+        memory: "10Gi"    # 128 Mebibytes RAM
+      limits:
+        cpu: "200m"        # 0.2 CPU core (throttled beyond this)
+        memory: "20Gi"    # 256 Mebibytes RAM (OOMKilled if exceeded)
