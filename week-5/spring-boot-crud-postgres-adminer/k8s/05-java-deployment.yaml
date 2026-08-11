@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-demo-app
+  namespace: java-demo
+  labels:
+    app: java-demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-demo-app
+  template:
+    metadata:
+      labels:
+        app: java-demo-app
+    spec:
+      containers:
+      - name: java-demo
+        image: jpalaparthi/bmw-k8s-java-demo:v0.0.1
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-config
+              key: SPRING_DATASOURCE_URL
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-config
+              key: SPRING_DATASOURCE_USERNAME
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
