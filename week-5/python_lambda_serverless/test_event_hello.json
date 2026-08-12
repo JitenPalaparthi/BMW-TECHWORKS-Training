@@ -1,0 +1,17 @@
+{
+  "version": "2.0",
+  "routeKey": "$default",
+  "rawPath": "/hello",
+  "rawQueryString": "name=Jiten",
+  "queryStringParameters": {
+    "name": "Jiten"
+  },
+  "headers": {},
+  "requestContext": {
+    "http": {
+      "method": "GET",
+      "path": "/hello"
+    }
+  },
+  "isBase64Encoded": false
+}

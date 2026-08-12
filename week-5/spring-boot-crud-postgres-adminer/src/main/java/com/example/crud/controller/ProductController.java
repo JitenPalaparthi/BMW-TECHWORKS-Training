@@ -6,6 +6,8 @@ import com.example.crud.service.ProductService;
 import jakarta.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,22 @@ public class ProductController {
 
     public ProductController(ProductService service) {
         this.service = service;
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, String>> health() {
+        return ResponseEntity.ok(Map.of("status", "UP"));
+    }
+
+    @GetMapping("/ready")
+    public ResponseEntity<Map<String, String>> ready() {
+        try {
+            // Optional: verify database connection readiness
+            service.findAll(); 
+            return ResponseEntity.ok(Map.of("status", "READY"));
+        } catch (Exception e) {
+            return ResponseEntity.status(503).body(Map.of("status", "NOT_READY", "error", e.getMessage()));
+        }
     }
 
     @PostMapping

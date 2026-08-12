@@ -1,0 +1,17 @@
+{
+  "version": "2.0",
+  "routeKey": "$default",
+  "rawPath": "/echo",
+  "rawQueryString": "",
+  "headers": {
+    "content-type": "application/json"
+  },
+  "requestContext": {
+    "http": {
+      "method": "POST",
+      "path": "/echo"
+    }
+  },
+  "body": "{\"message\":\"Hello Lambda\"}",
+  "isBase64Encoded": false
+}

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: java-demo
+data:
+  POSTGRES_DB: "cruddb"
+  POSTGRES_USER: "cruduser"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://crud-postgres.java-demo.svc.cluster.local:5432/cruddb"
+  SPRING_DATASOURCE_USERNAME: "cruduser"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+  namespace: java-demo
+type: Opaque
+stringData:
+  POSTGRES_PASSWORD: "crudpassword"

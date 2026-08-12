@@ -1,23 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: java-demo-app
+  name: java-demo-canary
   namespace: java-demo
   labels:
-    app: java-demo-app
+    app: java-demo-canary
+    track: canary
+  annotations:
+    kubernetes.io/change-cause: "Canary release v0.0.3"
 spec:
-  replicas: 5
+  replicas: 1
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: java-demo-app
+      app: java-demo-canary
+      track: canary
   template:
     metadata:
       labels:
-        app: java-demo-app
+        app: java-demo-canary
+        track: canary
     spec:
       containers:
       - name: java-demo
-        image: jpalaparthi/bmw-k8s-java-demo:v0.0.1
+        image: jpalaparthi/bmw-k8s-java-demo:v0.0.3
         ports:
         - containerPort: 8080
         env:
@@ -36,10 +42,3 @@ spec:
             secretKeyRef:
               name: postgres-secret
               key: POSTGRES_PASSWORD
-        resources:
-          requests:
-            cpu: "250m"
-            memory: "512Mi"
-          limits:
-            cpu: "500m"
-            memory: "1Gi"

@@ -26,3 +26,36 @@ Run Kustomize directly through `kubectl` from inside the `k8s/` directory:
 
 ```bash
 kubectl apply -k .
+
+
+# Record why you are making the change
+kubectl annotate deployment/java-demo-app -n java-demo \
+  kubernetes.io/change-cause="Upgrade Java app from v0.0.2 to v0.0.3" \
+  --overwrite
+
+# Change version
+kubectl set image deployment/java-demo-app -n java-demo \
+  java-demo=jpalaparthi/bmw-k8s-java-demo:v0.0.3
+
+# Watch rollout
+kubectl rollout status deployment/java-demo-app -n java-demo
+
+# See all revisions and CHANGE-CAUSE
+kubectl rollout history deployment/java-demo-app -n java-demo
+
+# Inspect one particular version/revision
+kubectl rollout history deployment/java-demo-app \
+  -n java-demo --revision=2
+
+# Roll back one version
+kubectl rollout undo deployment/java-demo-app -n java-demo
+
+# Roll back to an exact revision
+kubectl rollout undo deployment/java-demo-app \
+  -n java-demo --to-revision=2
+
+# See what your YAML would change BEFORE applying
+kubectl diff -f 05-java-deployment.yaml
+
+# Or compare the complete Kustomize application
+kubectl diff -k .
