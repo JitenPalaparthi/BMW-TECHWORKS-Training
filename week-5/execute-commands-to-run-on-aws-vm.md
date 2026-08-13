@@ -62,3 +62,9 @@ sudo mv ./kind /usr/local/bin/kind
 ```bash
 kind version
 ```
+
+# create a cluster
+
+```bash
+kubectl cluster-info --context kind-demo
+```
