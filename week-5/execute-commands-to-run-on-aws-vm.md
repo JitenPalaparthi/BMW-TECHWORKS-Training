@@ -66,5 +66,6 @@ kind version
 # create a cluster
 
 ```bash
+kind create cluster --name demo
 kubectl cluster-info --context kind-demo
 ```
