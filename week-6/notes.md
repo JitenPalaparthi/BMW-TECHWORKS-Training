@@ -4,8 +4,6 @@ docker run -d \
   -v ollama:/root/.ollama \
   ollama/ollama
 
-
-
  docker exec -it ollama ollama pull llama3.2
 
  docker exec -it ollama ollama run llama3.2
