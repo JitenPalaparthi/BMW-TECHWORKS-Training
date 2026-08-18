@@ -1,0 +1,10 @@
+Go Programming Language
+
+Go is a statically typed programming language originally developed at Google.
+Go provides lightweight concurrent execution through goroutines.
+Goroutines are managed by the Go runtime and are multiplexed onto operating system threads.
+Channels allow goroutines to communicate and synchronize with one another.
+Go includes automatic garbage collection.
+Go interfaces provide a mechanism for polymorphism without requiring traditional class inheritance.
+Go is widely used for cloud-native applications, distributed systems, microservices, networking software, command-line applications, and infrastructure tools.
+The Go runtime contains a scheduler responsible for scheduling goroutines onto available operating system threads.

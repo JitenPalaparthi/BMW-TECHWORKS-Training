@@ -1,0 +1,9 @@
+Rust Programming Language
+
+Rust is a systems programming language designed for safety, concurrency, and performance.
+Rust provides memory safety without requiring a garbage collector.
+Rust uses an ownership system to determine when memory should be allocated and released.
+Every value in Rust has an owner.
+Borrowing allows code to access values through references without transferring ownership.
+Rust's compiler checks ownership and borrowing rules at compile time.
+Rust is frequently used for operating systems, embedded software, network services, WebAssembly applications, and performance-sensitive software.

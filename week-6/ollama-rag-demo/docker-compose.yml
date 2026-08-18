@@ -1,0 +1,12 @@
+services:
+  rag:
+    build: .
+    environment:
+      # If Ollama is already running in Docker on the host and port 11434 is published:
+      - OLLAMA_URL=http://host.docker.internal:11434
+      - LLM_MODEL=gemma3
+      - EMBEDDING_MODEL=embeddinggemma
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    stdin_open: true
+    tty: true
