@@ -247,6 +247,11 @@ What it does: Shows the addresses assigned to the instance. Confirm the EC2 priv
 sudo kubeadm init \
   --apiserver-advertise-address=172.31.10.20 \
   --pod-network-cidr=192.168.0.0/16
+
+# To advertize and create certificates with public ip
+
+sudo kubeadm init  --apiserver-advertise-address=172.31.22.234  --apiserver-cert-extra-sans=13.48.1.217 --pod-network-cidr=192.168.0.0/16
+
 ```
 
 What it does: Initializes the Kubernetes control plane. --apiserver-advertise-address tells the API server which node address other cluster members should use; on EC2 nodes in the same VPC, use EC2-1's PRIVATE IPv4 address. --pod-network-cidr reserves 192.168.0.0/16 for Pod networking, which matches the Calico configuration used later.
