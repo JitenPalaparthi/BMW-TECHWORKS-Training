@@ -1,0 +1,14 @@
+server {
+    listen {{ port }};
+    server_name {{ server_name }};
+
+    {% if ssl_enabled %}
+    ssl_certificate     {{ ssl_certificate }};
+    ssl_certificate_key {{ ssl_certificate_key }};
+    {% endif %}
+
+    location / {
+        proxy_pass http://{{ backend_host }}:{{ backend_port }};
+    }
+    name {{name}}
+}
