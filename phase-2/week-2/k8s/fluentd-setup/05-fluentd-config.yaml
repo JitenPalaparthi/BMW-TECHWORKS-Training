@@ -1,0 +1,125 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+  namespace: logging
+
+data:
+  fluent.conf: |
+    # ============================================================
+    # INPUT
+    # Read Kubernetes container logs
+    # ============================================================
+
+    <source>
+      @type tail
+
+      path /var/log/containers/*.log
+
+      # Keeps track of how much Fluentd has already read
+      pos_file /tmp/fluentd-containers.log.pos
+
+      tag kubernetes.*
+
+      # Useful for testing.
+      # Fluentd reads existing logs when it starts.
+      read_from_head true
+
+      # Do not silently discard records that fail parsing
+      emit_unmatched_lines true
+
+      # ----------------------------------------------------------
+      # Kubernetes CRI / containerd log format
+      #
+      # Example:
+      # 2026-08-31T10:20:30.394277715Z stdout F Hello World
+      # ----------------------------------------------------------
+
+      <parse>
+        @type regexp
+
+        expression /^(?<time>.+) (?<stream>stdout|stderr)( (?<logtag>.))? (?<log>.*)$/
+
+        time_format %Y-%m-%dT%H:%M:%S.%NZ
+
+        keep_time_key true
+      </parse>
+    </source>
+
+
+    # ============================================================
+    # OPTIONAL TRANSFORM
+    #
+    # Add a simple field showing that Fluentd processed the record.
+    # ============================================================
+
+    <filter kubernetes.**>
+      @type record_transformer
+
+      <record>
+        collector fluentd
+      </record>
+    </filter>
+
+
+    # ============================================================
+    # OUTPUT
+    # Send logs to Loki
+    # ============================================================
+
+    <match kubernetes.**>
+
+      @type loki
+
+      # Loki Kubernetes Service
+      url "http://loki.logging.svc.cluster.local:3100"
+
+      # ----------------------------------------------------------
+      # Loki labels
+      #
+      # These can later be queried from Grafana:
+      #
+      # {job="fluentd"}
+      #
+      # {cluster="minikube"}
+      #
+      # {cluster="minikube",job="fluentd"}
+      # ----------------------------------------------------------
+
+      extra_labels {
+        "cluster":"minikube",
+        "job":"fluentd"
+      }
+
+      # stdout / stderr becomes another Loki label
+      <label>
+        stream $.stream
+      </label>
+
+      # Store complete Fluentd record as JSON in Loki
+      line_format json
+
+
+      # ==========================================================
+      # BUFFER
+      # ==========================================================
+
+      <buffer>
+
+        @type memory
+
+        # Send buffered logs every 3 seconds
+        flush_interval 3s
+
+        # Flush remaining logs when Fluentd shuts down
+        flush_at_shutdown true
+
+        chunk_limit_size 1m
+
+        # Retry if Loki temporarily becomes unavailable
+        retry_type exponential_backoff
+
+        retry_forever true
+        retry_max_interval 30
+      </buffer>
+    </match>

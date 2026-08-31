@@ -1,56 +1,16 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: node-exporter
-  namespace: monitoring
+  name: demo-daemonset
 spec:
   selector:
     matchLabels:
-      app: node-exporter
-
+      name: demo-daemonset
   template:
     metadata:
       labels:
-        app: node-exporter
+        name: demo-daemonset
     spec:
-      hostPID: true
-      hostNetwork: true
-
       containers:
-        - name: node-exporter
-          image: prom/node-exporter:latest
-
-          args:
-            - --path.procfs=/host/proc
-            - --path.sysfs=/host/sys
-            - --path.rootfs=/host/root
-
-          ports:
-            - name: metrics
-              containerPort: 9100
-
-          volumeMounts:
-            - name: proc
-              mountPath: /host/proc
-              readOnly: true
-
-            - name: sys
-              mountPath: /host/sys
-              readOnly: true
-
-            - name: root
-              mountPath: /host/root
-              readOnly: true
-
-      volumes:
-        - name: proc
-          hostPath:
-            path: /proc
-
-        - name: sys
-          hostPath:
-            path: /sys
-
-        - name: root
-          hostPath:
-            path: /
+      - name: demo-container
+        image: nginx:alpine
