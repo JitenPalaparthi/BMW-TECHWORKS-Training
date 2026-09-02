@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: file-demo-pvc
+  namespace: demo-app
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-demo-pvc
+  namespace: demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: file-demo-pvc
+  template:
+    metadata:
+      labels:
+        app: file-demo-pvc
+    spec:
+      containers:
+        - name: app
+          image: jpalaparthi/upload-files-demo:v0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: uploads
+              mountPath: /data
+      volumes:
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: file-demo-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: file-demo-pvc
+  namespace: demo-app
+spec:
+  selector:
+    app: file-demo-pvc
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: NodePort

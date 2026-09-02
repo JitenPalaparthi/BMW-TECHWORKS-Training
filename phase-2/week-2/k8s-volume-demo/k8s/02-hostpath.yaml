@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-demo-hostpath
+  namespace: demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: file-demo-hostpath
+  template:
+    metadata:
+      labels:
+        app: file-demo-hostpath
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: minikube-m02
+      containers:
+        - name: app
+          image: jpalaparthi/upload-files-demo:v0.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: uploads
+              mountPath: /data
+      volumes:
+        - name: uploads
+          hostPath:
+            path: /tmp/go-data
+            type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: file-demo-hostpath
+  namespace: demo-app
+spec:
+  selector:
+    app: file-demo-hostpath
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: NodePort

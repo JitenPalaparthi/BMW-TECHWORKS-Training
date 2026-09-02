@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-demo-emptydir
+  namespace: demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: file-demo-emptydir
+  template:
+    metadata:
+      labels:
+        app: file-demo-emptydir
+    spec:
+      containers:
+        - name: app
+          image: jpalaparthi/upload-files-demo:v0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: uploads
+              mountPath: /data
+      volumes:
+        - name: uploads
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: file-demo-emptydir
+  namespace: demo-app
+spec:
+  selector:
+    app: file-demo-emptydir
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: NodePort
