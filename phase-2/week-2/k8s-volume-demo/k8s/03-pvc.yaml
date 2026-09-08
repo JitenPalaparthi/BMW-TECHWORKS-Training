@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: jpalaparthi/upload-files-demo:v0.1
+          image: jpalaparthi/upload-files-demo:v0.3
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080

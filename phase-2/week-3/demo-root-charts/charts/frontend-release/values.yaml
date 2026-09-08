@@ -1,0 +1,14 @@
+replicaCount: 1
+
+image:
+  repository: jpalaparthi/frontend
+  tag: v1
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 5000
+  nodePort: 30080
+
+backend:
+  url: "http://backend-service:5001"
