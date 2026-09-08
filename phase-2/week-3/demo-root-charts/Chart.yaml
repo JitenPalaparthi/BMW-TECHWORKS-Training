@@ -3,7 +3,7 @@ name: demo-root-charts
 description: Frontend and Backend Demo Application
 type: application
 
-version: 0.1.0
+version: 0.1.2
 appVersion: "1.0"
 
 dependencies:
