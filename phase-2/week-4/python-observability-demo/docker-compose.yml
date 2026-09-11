@@ -1,0 +1,49 @@
+services:
+  service-a:
+    build:
+      context: ./service-a
+    container_name: service-a
+    environment:
+      SERVICE_NAME: service-a
+      SERVICE_B_URL: http://service-b:8001
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+    ports:
+      - "8000:8000"
+    depends_on:
+      - service-b
+      - jaeger
+
+  service-b:
+    build:
+      context: ./service-b
+    container_name: service-b
+    environment:
+      SERVICE_NAME: service-b
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
+    ports:
+      - "8001:8001"
+    depends_on:
+      - jaeger
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    container_name: prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      - service-a
+      - service-b
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.62.0
+    container_name: jaeger
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    ports:
+      - "16686:16686"
+      - "4317:4317"
+      - "4318:4318"
