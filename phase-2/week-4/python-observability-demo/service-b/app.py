@@ -102,6 +102,10 @@ async def work():
         delay = random.uniform(0.05, 0.30)
         span.set_attribute("work.delay_seconds", delay)
         logger.info(f"processing work delay={delay:.3f}s")
+        
+        # create a new span , make sure to upload the span to jaeger
+       
+
         await asyncio.sleep(delay)
         WORK_ITEMS.labels("success").inc()
         logger.info("work completed")
