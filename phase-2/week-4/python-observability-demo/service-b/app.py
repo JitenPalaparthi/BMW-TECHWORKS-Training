@@ -100,17 +100,46 @@ async def root():
 async def work():
     with tracer.start_as_current_span("business-work") as span:
         delay = random.uniform(0.05, 0.30)
-        span.set_attribute("work.delay_seconds", delay)
-        logger.info(f"processing work delay={delay:.3f}s")
-        
-        # create a new span , make sure to upload the span to jaeger
-       
 
+        span.set_attribute("work.delay_seconds", delay)
+
+        logger.info(f"processing work delay={delay:.3f}s")
+
+        # Child span for file operation
+        with tracer.start_as_current_span("store-to-file") as file_span:
+            file_span.set_attribute("file.name", "work.txt")
+            file_span.set_attribute("file.operation", "write")
+
+            try:
+                with open("work.txt", "a") as f:
+                    f.write(
+                        f"service={SERVICE_NAME}, "
+                        f"delay={delay:.3f}, "
+                        f"status=processing\n"
+                    )
+
+                file_span.set_attribute("file.write.success", True)
+                logger.info("data written to work.txt")
+
+            except Exception as e:
+                file_span.set_attribute("file.write.success", False)
+
+                file_span.record_exception(e)
+                file_span.set_status(
+                    trace.Status(
+                        trace.StatusCode.ERROR,
+                        str(e)
+                    )
+                )
+                raise
         await asyncio.sleep(delay)
         WORK_ITEMS.labels("success").inc()
         logger.info("work completed")
-        return {"service": SERVICE_NAME, "result": "ok", "delay_seconds": round(delay, 3)}
-
+        return {
+            "service": SERVICE_NAME,
+            "result": "ok",
+            "delay_seconds": round(delay, 3)
+        }
 
 @app.get("/metrics")
 async def metrics():
