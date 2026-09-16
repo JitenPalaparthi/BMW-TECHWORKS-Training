@@ -1,0 +1,5 @@
+region      = "ap-south-1"
+project     = "go-lambda-rds-demo"
+db_name     = "appdb"
+db_username = "appuser"
+db_password = "CHANGE-ME-TO-A-STRONG-PASSWORD"
